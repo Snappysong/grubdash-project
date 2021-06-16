@@ -8,12 +8,12 @@ router
     .route('/')
     .get(controller.list)
     .post(controller.create)
-    .all(methodNotAllowed)
+    .all(methodNotAllowed);
 
 router
     .route('/:dishId')
     .get(controller.read)
     .put(controller.update)
-    .all(methodNotAllowed)
+    .all(methodNotAllowed);
 
 module.exports = router;
