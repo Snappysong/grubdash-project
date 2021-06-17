@@ -9,7 +9,7 @@ function orderExists(req, res, next){
     const {orderId} = req.params;
     const foundOrder = orders.find((order) => order.id === orderId);
     if(foundOrder){
-        res.locals.order = foundOrder
+        res.locals.order = foundOrder;
         return next();
     }
     next({
@@ -19,7 +19,7 @@ function orderExists(req, res, next){
 }
 
 function orderHasDeliverTo(req, res, next){
-    const {data: {deliverTo} ={}} = req.body;
+    const {data: {deliverTo} = {} } = req.body;
     if(!deliverTo || deliverTo === ""){
         next({
             status: 400,
@@ -88,7 +88,7 @@ function orderHasQuantity(req, res, next){
     const {data: { dishes } = {}} = req.body;
     const missingQuantity = dishes.find((dish) => !dish.quantity);
     if(missingQuantity){
-        const index = dishes.indexOf(missingQuantity)
+        const index = dishes.indexOf(missingQuantity);
         next({
             status: 400,
             message: `Dish ${index} must have a quantity that is an integer greater than 0.`
@@ -101,7 +101,7 @@ function orderQuantityIsInteger(req, res, next){
     const {data: {dishes} = {}} = req.body;
     const notAInteger = dishes.find((dish) => !Number.isInteger(dish.quantity));
     if(notAInteger){
-        const index = dishes.indexOf(notAInteger)
+        const index = dishes.indexOf(notAInteger);
         next({
             status: 400,
             message: `Dish ${index} must have a quantity that is an integer greater than 0.`
@@ -167,19 +167,19 @@ function update(req, res){
     const { data: {deliverTo, mobileNumber, status, dishes} = {} } = req.body;
     const { data: { dishes: {quantity} = {} }} = req.body;
     if(originalDeliverTo !== deliverTo){
-        order.deliverTo = deliverTo
+        order.deliverTo = deliverTo;
     }
     if(originalMobileNumber !== mobileNumber){
-        order.mobileNumber = mobileNumber
+        order.mobileNumber = mobileNumber;
     }
     if(originalStatus !== status){
-        order.status = status
+        order.status = status;
     }
     if(originalDishes !== dishes){
-        order.dishes = dishes
+        order.dishes = dishes;
     }
     if(originalQuantity !== quantity){
-        order.dishes.quantity = quantity
+        order.dishes.quantity = quantity;
     }
     res.json({data: order});
 }

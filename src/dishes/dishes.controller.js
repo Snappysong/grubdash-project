@@ -9,7 +9,7 @@ function dishExists(req, res, next){
     const {dishId} = req.params;
     const foundDish = dishes.find((dish) => dish.id === dishId);
     if (foundDish){
-        res.locals.dish = foundDish
+        res.locals.dish = foundDish;
         return next();
     }
     next({
@@ -115,16 +115,16 @@ function update(req, res){
     const originalImgUrl = dish.image_url;
     const {data: {name, description, price, image_url} = {} } = req.body;
     if(originalName !== name){
-        dish.name = name
+        dish.name = name;
     }
     if(originalDescription !== description){
-        dish.description = description
+        dish.description = description;
     }
     if(originalPrice !== price){
-        dish.price = price
+        dish.price = price;
     }
     if(originalImgUrl !== image_url){
-        dish.image_url = image_url
+        dish.image_url = image_url;
     }
     res.json({data: dish});
 }
